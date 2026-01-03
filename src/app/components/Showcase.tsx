@@ -64,7 +64,7 @@ export function Showcase() {
             Project Showcase
           </h2>
           <p className="text-purple-200 max-w-2xl mx-auto">
-            Innovative solutions in AI, machine learning, and data science
+            Creating innovative solutions in AI, machine learning, and data science
           </p>
         </motion.div>
       </div>
