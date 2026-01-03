@@ -64,7 +64,7 @@ export function Gallery() {
             Gallery
           </h2>
           <p className="text-purple-200 max-w-2xl mx-auto">
-            A curated collection of creative work, design explorations, and visual experiments
+            A curated collection of creative work, design explorations, visual experiments, and fun games.
           </p>
         </motion.div>
 
