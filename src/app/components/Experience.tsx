@@ -13,9 +13,9 @@ export function Experience() {
     {
       year: '2023',
       title: 'Design & Development',
-      role: 'Full Stack Designer',
+      role: 'Game and Web Designer',
       description: 'Bridging the gap between design and development, creating seamless user experiences from concept to deployment.',
-      skills: ['React', 'TypeScript', 'Design Systems'],
+      skills: ['React', 'TypeScript', 'Python', 'Design Systems']
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -55,7 +55,7 @@ export function Experience() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Professional Journey
+          My Journey
         </motion.h2>
         <div className="space-y-16">
           {experiences.map((exp, index) => (
