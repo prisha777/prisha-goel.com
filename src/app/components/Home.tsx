@@ -1,33 +1,43 @@
 import portrait from '@/assets/portfolio/portrait.webp';
 import { siteHref } from '../navigation';
 
+const selectedWork = [
+  {number:'01',label:'Stanford AIMI · Research',title:'Pneumonia detection from chest X-rays',text:'Image classification, lesion localization, and what makes a model useful to clinicians.',path:'research/stanford-aimi/',kind:'imaging'},
+  {number:'02',label:'UCI × GATI BEAM · Published paper',title:'AI predictions need experimental evidence',text:'My first-author review of AI and experimental IgE epitope mapping.',path:'research/uci-gati/',kind:'paper'},
+  {number:'03',label:'STEM4Others · Teaching',title:'From first programs to independent projects',text:'Weekly Python and Java classes at Mitchell Park Library, with students progressing to peer tutoring.',path:'experience/stem4others/',kind:'teaching'},
+];
+
 export function Home() {
   return <>
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 pt-32 pb-14 md:pt-40 md:pb-20">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-[1fr_240px] gap-10 md:gap-16 items-center">
-        <div>
-          <p className="text-purple-300 text-sm mb-5">Prisha Goel · Palo Alto Middle College, Class of 2027</p>
-          <h1 className="text-white text-4xl md:text-5xl font-semibold tracking-tight leading-tight mb-6">Healthcare AI research.<br /><span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Free coding education.</span></h1>
-          <p className="text-purple-100 text-lg leading-relaxed max-w-2xl mb-7">I study how AI can help clinicians interpret medical data, and lead weekly Python and Java classes for 30+ K–12 students through STEM4Others.</p>
-          <div className="flex flex-wrap gap-3">
-            <a href="https://scienceyouth.org/web/viewer.php?id=352" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-600/20">Read my published UCI paper ↗</a>
-            <a href="mailto:goelprisha.07@gmail.com" className="px-6 py-3 rounded-full border border-purple-400/60 text-purple-100 text-sm hover:border-pink-400">Email me about research or teaching</a>
+    <section className="black-hero">
+      <div className="hero-copy">
+        <p className="mono-label hero-intro">Prisha Goel <span>/</span> Palo Alto, California</p>
+        <h1>Healthcare AI research.<br /><span>Free coding education.</span></h1>
+        <p className="hero-description">I study how AI can help clinicians interpret medical data and teach Python and Java through STEM4Others. I’m a senior at Palo Alto Middle College, dual-enrolled at Foothill College.</p>
+        <div className="hero-actions">
+          <a className="metal-button" href="https://scienceyouth.org/web/viewer.php?id=352" target="_blank" rel="noopener noreferrer">Read my published paper <span aria-hidden="true">↗</span></a>
+          <a className="text-action" href="mailto:goelprisha.07@gmail.com">Contact me <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="hero-footnote"><span className="status-dot" aria-hidden="true" /> Research · Development · Teaching <span className="hero-year">Class of 2027</span></div>
+      </div>
+      <figure className="portrait-composition">
+        <div className="portrait-grid" aria-hidden="true" />
+        <span className="art-square square-one" aria-hidden="true" /><span className="art-square square-two" aria-hidden="true" /><span className="art-square square-three" aria-hidden="true" />
+        <div className="portrait-image"><img src={portrait} alt="Prisha Goel" width="420" height="560" fetchPriority="high" /></div>
+        <figcaption className="mono-label"><span>PG / 01</span><span>Research & education</span></figcaption>
+      </figure>
+    </section>
+    <section className="work-section">
+      <div className="work-heading"><div><p className="mono-label">Portfolio / selected work</p><h2>Research. Code. Community.</h2></div><a className="text-action" href={siteHref('projects/')}>All projects <span aria-hidden="true">↗</span></a></div>
+      <div className="work-grid">
+        {selectedWork.map(item=><a href={siteHref(item.path)} key={item.number} className={`work-card work-card-${item.kind}`}>
+          <div className="work-visual" aria-hidden="true">
+            {item.kind==='imaging' ? <div className="imaging-diagram"><div className="scan-frame"><i/><i/><i/><i/><span>+</span></div><div className="diagram-labels"><span>Classification</span><span>Localization</span><span>Clinical usability</span></div></div> : item.kind==='paper' ? <div className="paper-diagram"><div><small>01 / COMPUTATION</small><strong>AI prediction</strong></div><span>+</span><div><small>02 / VALIDATION</small><strong>Experimental evidence</strong></div></div> : <div className="teaching-diagram"><strong>30<span>+</span></strong><div><span>K–12 students</span><span>Weekly coding classes</span><code>Python / Java</code></div></div>}
           </div>
-        </div>
-        <img src={portrait} alt="Prisha Goel" width="240" height="300" fetchPriority="high" className="w-36 md:w-60 aspect-[4/5] object-cover object-top rounded-2xl border border-purple-500/30 justify-self-start md:justify-self-end" />
+          <div className="work-card-copy"><p className="mono-label">{item.label}</p><h3>{item.title}</h3><p>{item.text}</p><div className="work-card-bottom"><span>View {item.kind==='teaching'?'teaching work':'research'}</span><span className="arrow-box" aria-hidden="true">↗</span></div></div>
+        </a>)}
       </div>
     </section>
-    <section className="bg-slate-950 py-12 md:py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-white text-2xl mb-7">Selected work</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {label:'Stanford AIMI · 2026',title:'Pneumonia detection from chest X-rays',text:'Studied image classification and lesion localization for clinical use.',path:'research/stanford-aimi/',cta:'Read the research'},
-            {label:'UCI × GATI BEAM · 2026',title:'Testing what AI predicts about allergies',text:'First-author paper on combining AI with experimental IgE epitope mapping.',path:'research/uci-gati/',cta:'View the paper and context'},
-            {label:'STEM4Others · Continuing',title:'Students progressing to projects and peer tutoring',text:'Learners have built their own projects, joined STEM clubs, and begun tutoring younger students.',path:'experience/stem4others/',cta:'See my teaching work'},
-          ].map(item => <a key={item.path} href={siteHref(item.path)} className="group block bg-slate-900/50 border border-indigo-800/30 rounded-2xl p-6 hover:border-purple-500/60 transition-colors"><p className="text-xs uppercase tracking-wide text-purple-400 mb-4">{item.label}</p><h3 className="text-white text-lg mb-3">{item.title}</h3><p className="text-indigo-200 text-sm leading-relaxed mb-5">{item.text}</p><span className="text-purple-300 text-sm group-hover:text-pink-300">{item.cta} →</span></a>)}
-        </div>
-      </div>
-    </section>
+    <section className="home-contact-strip"><p>For research, nonprofit development,<br />or a conversation about teaching.</p><a className="metal-button" href="mailto:goelprisha.07@gmail.com">Let’s get in touch <span aria-hidden="true">↗</span></a></section>
   </>;
 }

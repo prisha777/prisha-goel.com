@@ -19,7 +19,7 @@ export default function App() {
     document.title=page?`${page==='press'?'Writing & media':page.charAt(0).toUpperCase()+page.slice(1)} | Prisha Goel`:'Prisha Goel | Healthcare AI Research & Coding Education';
   },[route]);
   let content;
-  if(aliases[route])content=<p className="pt-36 pb-20 px-6 text-purple-200">This content has moved. <a className="underline" href={siteHref(aliases[route])}>Continue →</a></p>;
+  if(aliases[route])content=<p className="pt-36 pb-20 px-6 text-zinc-200">This content has moved. <a className="underline" href={siteHref(aliases[route])}>Continue →</a></p>;
   else if(id)content=<DetailPage category={page} id={id}/>;
   else if(page==='')content=<Home/>;
   else if(['research','projects','experience'].includes(page))content=<ContentIndex category={page as 'research'|'projects'|'experience'}/>;
@@ -27,5 +27,5 @@ export default function App() {
   else if(page==='press')content=<MediaPage/>;
   else if(page==='contact')content=<ContactPage/>;
   else content=<DetailPage category="missing" id="missing"/>;
-  return <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 overflow-x-hidden"><a href="#main-content" className="skip-link">Skip to content</a><Header/><main id="main-content"><Suspense fallback={<p role="status" className="pt-36 pb-20 px-6 text-purple-200">Loading page…</p>}>{content}</Suspense></main><Footer/></div>;
+  return <div className="site-shell min-h-screen bg-black overflow-x-hidden"><a href="#main-content" className="skip-link">Skip to content</a><Header/><main id="main-content"><Suspense fallback={<p role="status" className="pt-36 pb-20 px-6 text-zinc-200">Loading page…</p>}>{content}</Suspense></main><Footer/></div>;
 }

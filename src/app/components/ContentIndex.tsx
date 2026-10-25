@@ -32,7 +32,7 @@ export function ContentIndex({category}:{category:'research'|'projects'|'experie
   return <>
     <PageIntro eyebrow={isResearch?'Healthcare · Biology · Climate':category==='projects'?'Software & development':'Teaching, leadership & service'} title={isResearch?'Research':category==='projects'?'Projects':'Experience'} description={isResearch?'Medical imaging, wearable sensors, allergy biology, and environmental data.':category==='projects'?'Software I’ve built for nonprofits, students, and my own learning.':'Teaching, student leadership, patient support, and climate advocacy.'} />
     <div className="max-w-6xl mx-auto px-6 pb-20 grid md:grid-cols-2 gap-6">
-      {entries.map(entry=><a key={entry.id} href={siteHref(entry.href)} className="group bg-slate-900/50 border border-indigo-800/30 rounded-2xl p-6 hover:border-purple-500/60 transition-colors"><h2 className="text-white text-lg mb-3">{entry.title}</h2><p className="text-indigo-200 text-sm leading-relaxed mb-5">{entry.summary}</p><span className="text-purple-300 text-sm group-hover:text-pink-300">{isResearch?'Research details':category==='projects'?'Project details':'Role details'} →</span></a>)}
+      {entries.map(entry=><a key={entry.id} href={siteHref(entry.href)} className="portfolio-card group bg-zinc-950 border border-zinc-800 rounded-lg p-6 hover:border-zinc-500 transition-colors"><h2 className="text-white text-lg mb-3">{entry.title}</h2><p className="text-zinc-300 text-sm leading-relaxed mb-5">{entry.summary}</p><span className="text-zinc-300 text-sm group-hover:text-white">{isResearch?'Research details':category==='projects'?'Project details':'Role details'} →</span></a>)}
     </div>
   </>;
 }
