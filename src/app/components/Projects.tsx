@@ -1,162 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { ProjectSplashScreen } from './ProjectSplashScreen';
+import { projects } from '../data/projects';
+import { siteHref } from '../navigation';
 
 export function Projects() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [selectedProject, setSelectedProject] = useState<{
-    title: string;
-    type: 'pingpong' | 'wator' | 'wordle' | 'bakery' | 'scheduler' | 'notes' | 'space' | 'solar';
-    github: string;
-  } | null>(null);
-
-  const projects = [
-    {
-      title: 'Stemplore',
-      category: 'STEM4Others · Educational Platform',
-      description: 'Lead 5+ student developers building a free educational platform with JavaScript, HTML/CSS, and Python, extending our weekly STEM teaching into accessible online learning.',
-      image: '',
-      preview: 'STEM',
-      year: 'Ongoing',
-      color: 'from-purple-500 to-pink-500',
-      tags: ['Education', 'Team Leadership', 'Web Development'],
-      github: 'https://stemplore.com',
-      type: null
-    },
-    {
-      title: 'Leebo’s Sickle Cell Support Group',
-      category: 'Nonprofit Web Development',
-      description: 'Independently designed and built a nonprofit website with newly diagnosed families in mind, making essential information and support easier to find.',
-      image: '',
-      preview: 'Care + Code',
-      year: '2025',
-      color: 'from-blue-500 to-cyan-500',
-      tags: ['Nonprofit', 'Web Design', 'Accessibility'],
-      github: 'https://leeboscsg.org',
-      type: null
-    },
-    {
-      title: 'San Francisco Flood Vulnerability',
-      category: 'Independent Research · Foothill College',
-      description: 'Mapped neighborhood flood vulnerability using geographic and socioeconomic data. Research & Service Leadership Symposium finalist; presented in a CCIR Student Spotlight.',
-      image: '',
-      preview: 'Data × Climate',
-      year: '2026',
-      color: 'from-cyan-500 to-blue-500',
-      tags: ['Data Science', 'Climate', 'Research'],
-      github: 'https://www.youtube.com/watch?v=kckUt2K1BSo',
-      type: null
-    },
-    {
-      title: 'Ping Pong Game',
-      category: 'Game Development',
-      description: 'Classic ping pong game with sound effects, collision detection, and smooth gameplay mechanics built from scratch.',
-      image: 'https://images.unsplash.com/photo-1719822566379-7547340da87b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5nJTIwcG9uZyUyMHRhYmxlJTIwZ2FtZXxlbnwxfHx8fDE3NjY1Mzk3MDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2021',
-      color: 'from-purple-500 to-pink-500',
-      tags: ['Game Dev', 'Sound Effects', 'Animation'],
-      github: 'https://github.com/prisha777',
-      type: 'pingpong' as const
-    },
-    {
-      title: 'WatorWorld Simulation',
-      category: 'School Assignment',
-      description: 'Predator-prey ecosystem simulation game implementing complex algorithms for population dynamics and behavior patterns.',
-      image: 'https://images.unsplash.com/photo-1568691452405-99cbf704e978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVkYXRvciUyMHByZXklMjBzaW11bGF0aW9ufGVufDF8fHx8MTc2NjUzOTcwOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2022',
-      color: 'from-blue-500 to-cyan-500',
-      tags: ['Simulation', 'Algorithms', 'Game Logic'],
-      github: 'https://github.com/prisha777',
-      type: 'wator' as const
-    },
-    {
-      title: 'NYT Wordle Clone',
-      category: 'School Assignment',
-      description: 'Recreation of the popular NYT Wordle game featuring word validation, color-coded feedback, and keyboard interaction.',
-      image: 'https://images.unsplash.com/photo-1552321046-a54642dc0cb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JkJTIwcHV6emxlJTIwZ2FtZSUyMGxldHRlcnN8ZW58MXx8fHwxNzY2NTM5NzA4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2022',
-      color: 'from-pink-500 to-rose-500',
-      tags: ['Word Game', 'Interactive', 'UI/UX'],
-      github: 'https://github.com/prisha777',
-      type: 'wordle' as const
-    },
-    {
-      title: 'Bakery Website',
-      category: 'Personal Passion Project',
-      description: 'Beautiful website showcasing my passion for baking with recipes, gallery, and elegant design that reflects artisan craft.',
-      image: 'https://images.unsplash.com/photo-1642333328966-f248191ff0da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWtlcnklMjBwYXN0cmllcyUyMHdlYnNpdGV8ZW58MXx8fHwxNzY2NTM5NzA5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2023',
-      color: 'from-orange-500 to-pink-500',
-      tags: ['Web Design', 'Passion Project', 'Food'],
-      github: 'https://github.com/prisha777',
-      type: 'bakery' as const
-    },
-    {
-      title: 'Schedule Planner',
-      category: 'Productivity Tool',
-      description: 'Time management application that I used throughout school to organize tasks, schedule events, and boost productivity.',
-      image: 'https://images.unsplash.com/photo-1588453251771-cd919b362ed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYWxlbmRhciUyMHBsYW5uZXIlMjBzY2hlZHVsZXxlbnwxfHx8fDE3NjY1Mzk3MDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2024',
-      color: 'from-indigo-500 to-purple-500',
-      tags: ['Productivity', 'Time Management', 'Personal Tool'],
-      github: 'https://github.com/prisha777',
-      type: 'scheduler' as const
-    },
-    {
-      title: 'iNotes',
-      category: 'Note-Taking App',
-      description: 'JavaScript-based note-taking application with rich text editing, organization features, and local storage functionality.',
-      image: 'https://images.unsplash.com/photo-1643094829594-0ae1519d75af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxub3RlYm9vayUyMG5vdGVzJTIwd3JpdGluZ3xlbnwxfHx8fDE3NjY1Mzk3MDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2024',
-      color: 'from-emerald-500 to-teal-500',
-      tags: ['JavaScript', 'CRUD', 'Local Storage'],
-      github: 'https://github.com/prisha777',
-      type: 'notes' as const
-    },
-    {
-      title: 'Space Shooter Game',
-      category: 'Game Development',
-      description: 'Action-packed space shooter with enemy AI, power-ups, scoring system, and engaging gameplay mechanics.',
-      image: 'https://images.unsplash.com/photo-1531812494838-636e337af5a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGFjZSUyMHNob290ZXIlMjBnYW1lfGVufDF8fHx8MTc2NjUzOTcxMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2025',
-      color: 'from-blue-500 to-purple-500',
-      tags: ['Game Dev', 'Space', 'Interactive'],
-      github: 'https://github.com/prisha777',
-      type: 'space' as const
-    },
-    {
-      title: 'Solar System Orbit Simulator',
-      category: 'Educational Simulation',
-      description: 'Interactive solar system simulation featuring accurate planetary orbits, physics calculations, and celestial mechanics.',
-      image: 'https://images.unsplash.com/photo-1741997699658-d37ee7a2e010?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2xhciUyMHN5c3RlbSUyMHBsYW5ldHMlMjBvcmJpdHxlbnwxfHx8fDE3NjY1Mzk3MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      year: '2025',
-      color: 'from-cyan-500 to-blue-500',
-      tags: ['Physics', 'Simulation', 'Educational'],
-      github: 'https://github.com/prisha777',
-      type: 'solar' as const
-    }
-  ];
-
-  const handleProjectClick = (project: typeof projects[0]) => {
-    if (!project.type) return;
-    setSelectedProject({
-      title: project.title,
-      type: project.type,
-      github: project.github
-    });
-  };
 
   return (
     <>
-      {/* Project Splash Screen */}
-      {selectedProject && (
-        <ProjectSplashScreen
-          project={selectedProject}
-          onComplete={() => setSelectedProject(null)}
-        />
-      )}
-
       <section id="projects" className="py-32 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 relative overflow-hidden">
         {/* Animated particles */}
         {[...Array(30)].map((_, i) => (
@@ -203,9 +55,9 @@ export function Projects() {
             {projects.map((project, index) => (
               <motion.a
                 key={index}
-                href={project.type ? '#projects' : project.github}
-                target={project.type ? undefined : '_blank'}
-                rel={project.type ? undefined : 'noopener noreferrer'}
+                href={siteHref(`projects/${index + 1}/`)}
+
+
                 className="group cursor-pointer hoverable relative block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-400"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -214,12 +66,7 @@ export function Projects() {
                 onMouseEnter={() => setHoveredProject(index)}
                 onMouseLeave={() => setHoveredProject(null)}
                 whileHover={{ y: -10 }}
-                onClick={(event) => {
-                  if (project.type) {
-                    event.preventDefault();
-                    handleProjectClick(project);
-                  }
-                }}
+
               >
                 {/* Card */}
                 <div className="bg-slate-900/50 backdrop-blur-sm border border-purple-800/30 rounded-lg overflow-hidden hover:border-purple-600 transition-all">
@@ -281,7 +128,7 @@ export function Projects() {
                     <p className="text-purple-200 text-sm mb-4 line-clamp-3">
                       {project.description}
                     </p>
-                    
+
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag, i) => (

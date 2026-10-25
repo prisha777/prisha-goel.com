@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 
-export function Press() {
+export function Press({ mode = 'press' }: { mode?: 'press' | 'community' }) {
   const articles = [
     {
       title: 'STEM4Others - Mitchell Park Library Chapter',
@@ -62,7 +62,7 @@ export function Press() {
         </motion.div>
 
         {/* Featured press card reuses the existing glass, border, gradient and hover styles. */}
-        <motion.a
+        {mode === 'press' && <motion.a
           href="https://www.canarymedia.com/articles/electrification/palo-alto-kids-induction-stoves"
           target="_blank"
           rel="noopener noreferrer"
@@ -82,6 +82,8 @@ export function Press() {
                   <span className="text-sm uppercase tracking-widest text-indigo-300">Canary Media</span>
                   <span className="text-xs text-purple-300">Article preview ↗</span>
                 </div>
+                <img src="https://img.canarymedia.com/content/uploads/Electra-induction-stove.jpeg?auto=compress%2Cformat&crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=501&q=80&s=ca4839a5de12022939d5bf568349815a&w=864" alt="Induction cooktop pictured in the Canary Media article" loading="lazy" className="w-full aspect-video object-cover" />
+                <p className="px-6 pt-3 text-xs text-indigo-300">Image: Electra, via Canary Media</p>
                 <div className="p-6 md:p-8">
                   <div className="text-xs uppercase tracking-wider text-purple-400 mb-4">Electrification · April 6, 2026</div>
                   <h3 className="text-white text-2xl md:text-3xl leading-snug mb-6">
@@ -111,9 +113,10 @@ export function Press() {
             </div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-3xl opacity-20" />
           </article>
-        </motion.a>
+        </motion.a>}
 
         {/* Articles Grid */}
+        {mode === 'community' && <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map((article, index) => (
             <motion.a
@@ -199,6 +202,7 @@ export function Press() {
             Visit STEM4Others Chapter
           </motion.a>
         </motion.div>
+        </>}
       </div>
     </section>
   );

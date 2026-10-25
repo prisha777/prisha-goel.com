@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import journeyData from '../data/journey.json';
+import { siteHref } from '../navigation';
 
-export function Journey() {
+export function Journey({ category = 'experience' }: { category?: 'research' | 'experience' | 'about' | 'community' }) {
   const [typedText, setTypedText] = useState('');
-  const fullText = 'My Journey';
+  const fullText = category === 'research' ? 'Research' : category === 'about' ? 'Honors & Education' : category === 'community' ? 'Teaching & Service' : 'Experience';
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Typing animation effect
@@ -21,173 +23,7 @@ export function Journey() {
     return () => clearInterval(interval);
   }, []);
 
-  const journeyData = [
-    {
-        "period": "2026–2027 (Senior Year)",
-        "status": "Continuing",
-        "focus": "Palo Alto Middle College · Foothill College · Teaching, Development & Advocacy",
-        "color": "from-purple-500 to-pink-500",
-        "cards": [
-            {
-                "title": "STEM4Others – Chapter President, Tutor & App Developer",
-                "description": "January 2023–Present · Continue leading the Palo Alto chapter, teaching weekly Python and Java sessions for 30+ K–12 students at Mitchell Park Library. Lead 5+ student developers building Stemplore, a free educational platform.",
-                "icon": "🎓"
-            },
-            {
-                "title": "Induction Rocks – Policy & Web Development Intern",
-                "description": "2025–Present · Build and maintain the task force’s website around residents’ questions about rebates, electrical requirements, and cooktop lending. Give public comment at Palo Alto City Council meetings and help residents access cleaner cooking. Featured in Canary Media in April 2026.",
-                "icon": "🌍"
-            },
-            {
-                "title": "Schoolhouse.world – Certified SAT Tutor",
-                "description": "2024–Present · Teach four hours weekly of SAT Math and Reading & Writing. Create targeted practice in algebra, data analysis, grammar, and evidence-based reading, with written progress summaries for families.",
-                "icon": "📐"
-            },
-            {
-                "title": "Pathwise · Imagineerz Learning · Code for Fun",
-                "description": "August 2023–Present · Continue mentoring and teaching STEM and engineering through inquiry-driven activities. Design problems with accessible starting points and stretch goals, and co-develop modules with program leadership.",
-                "icon": "🤝"
-            },
-            {
-                "title": "Girls Who Code – Program Scholar & Peer Educator",
-                "description": "June 2025–Present · Peer-mentor scholars in Python, data analysis, and web development. Certified in Python, AI/ML, Data Science, Cybersecurity, HTML/CSS, and Web Design; recognized for the cohort’s highest-ranked policy proposition.",
-                "icon": "💻"
-            },
-            {
-                "title": "VA Palo Alto Health Care System – Volunteer",
-                "description": "2023–Present · Support patients with transport, appointment rescheduling, and clinic navigation. Continue contributing to community service alongside teaching and research, with 300+ volunteer hours across activities.",
-                "icon": "💜"
-            },
-            {
-                "title": "NOAA – Ambassador · Kinnu – Content Creator",
-                "description": "2023–Present · Continue marine conservation outreach as a NOAA ambassador and create SAT and STEM educational content for Kinnu.",
-                "icon": "🌊"
-            },
-            {
-                "title": "Foothill College – Dual Enrollment",
-                "description": "2025–Present · Study computer science, mathematics, physics, and engineering alongside high school coursework. Earned a 3.84 GPA and Dean’s List, First Honors in two quarters; expected high school graduation: June 2027.",
-                "icon": "📚"
-            }
-        ]
-    },
-    {
-        "period": "2026 Research",
-        "status": "Research & Presentations",
-        "focus": "Medical Imaging, Biology, Climate Vulnerability & Natural Language Processing",
-        "color": "from-blue-500 to-cyan-500",
-        "cards": [
-            {
-                "title": "Stanford AIMI – Summer Research Intern",
-                "description": "Summer 2026 · Researched pneumonia diagnosis from chest radiographs using classification, object detection, segmentation, and multimodal vision-language models. Explored fairness and clinical deployment, including why accurate classification alone does not give radiologists lesion localization.",
-                "icon": "🩻"
-            },
-            {
-                "title": "UC Irvine · GATI BEAM – Student Researcher",
-                "description": "Summer 2026 · First author of “From Sensitization to Molecular Mechanism: Why AI Must Complement Experimental IgE Epitope Mapping,” mentored by Dr. Delisha Patel. Completed a robotics project and coursework with Prof. David Reinkensmeyer, connecting AI and experimental evidence with assistive technology.",
-                "icon": "🧬"
-            },
-            {
-                "title": "Foothill College – Independent Flood Vulnerability Research",
-                "description": "May 2026 · Combined geographic and socioeconomic data to map flood vulnerability across San Francisco neighborhoods. Examined how gaps in historical records can obscure risk. Independently designed the project under Prof. Dan Kauffman and presented it as a Research & Service Leadership Symposium finalist.",
-                "icon": "🗺️"
-            },
-            {
-                "title": "Cambridge Centre for International Research – Student Researcher",
-                "description": "2026 · Worked with Daniel Ebanks to analyze COVID-related public sentiment in Twitter data. Investigated failures on irony and tone, where sentiment polarity could invert meaning despite confident predictions. Also presented flood vulnerability research in a CCIR Student Spotlight.",
-                "icon": "🔎"
-            }
-        ]
-    },
-    {
-        "period": "2025 Research & Development",
-        "status": "Completed Projects",
-        "focus": "Biosensors, AI for Learning & Nonprofit Technology",
-        "color": "from-pink-500 to-orange-500",
-        "cards": [
-            {
-                "title": "Brown University – Data Science Research Intern",
-                "description": "July–August 2025 · Built machine-learning biosensor software with Prof. Nathan Didier to detect binge-drinking episodes from wearable data. Wrote preprocessing and feature-engineering pipelines and investigated how device non-wear and hardware faults affect data reliability.",
-                "icon": "🔬"
-            },
-            {
-                "title": "Inspirit AI – AI/ML Summer Intern",
-                "description": "Summer 2025 · Fine-tuned an educational chatbot using a retrieval-augmented generation pipeline. Engineered prompts for step-by-step academic guidance that builds understanding rather than simply supplying answers.",
-                "icon": "🤖"
-            },
-            {
-                "title": "Leebo’s Sickle Cell Support Group – Development Intern",
-                "description": "2025 · Independently designed and built the nonprofit’s website, prioritizing information for newly diagnosed families. Contributed through a website and iOS development internship.",
-                "icon": "🛠️"
-            }
-        ]
-    },
-    {
-        "period": "Leadership Foundations & Activities",
-        "status": "Experience",
-        "focus": "Mentorship, Communication, Science Writing & Athletics",
-        "color": "from-purple-500 to-pink-500",
-        "cards": [
-            {
-                "title": "STEM4Others & Dreamcatchers",
-                "description": "Tutored middle and elementary school students in coding and STEM and assisted local teams in programming competitions. Continue building on these teaching foundations through chapter leadership and weekly tutoring.",
-                "icon": "💻"
-            },
-            {
-                "title": "Hope Horizon & Engin – Volunteer Work",
-                "description": "Mentored youth in robotics and taught English to Ukrainian newcomers, building connections through patient, accessible explanations.",
-                "icon": "🤝"
-            },
-            {
-                "title": "Climate Policy Engagement – CCVL",
-                "description": "Participated in youth advocacy, letter-writing campaigns, and community education. Continue climate and health advocacy through Induction Rocks.",
-                "icon": "📢"
-            },
-            {
-                "title": "The Scientific Teen – Science Writer",
-                "description": "Published a science article on the Curiosity rover, sharing space exploration with a young audience.",
-                "icon": "✍️"
-            },
-            {
-                "title": "Saga Education – Math Fellow Certificate",
-                "description": "Developed hands-on tutoring and classroom management skills for supporting students in high-need schools.",
-                "icon": "📐"
-            },
-            {
-                "title": "Speech, Debate & Cross Country",
-                "description": "Two years of Gunn Varsity Public Forum debate, including Berkeley and Stanford tournaments; Foothill Owl Varsity Speech & Debate; and junior varsity cross country.",
-                "icon": "🎤"
-            }
-        ]
-    },
-    {
-        "period": "Honors & Recognition",
-        "status": "Awards",
-        "focus": "Research, Programming, Academic Achievement & Service",
-        "color": "from-blue-500 to-cyan-500",
-        "cards": [
-            {
-                "title": "Research & Service Leadership Symposium – Finalist",
-                "description": "2026 · Recognized for independent flood vulnerability research at Foothill College, presented to a public audience and faculty judging panel.",
-                "icon": "🏅"
-            },
-            {
-                "title": "Stanford ProCo – Programming Awards",
-                "description": "2025–2026 · 1st Place as a solo competitor in the individual competition and 4th Place in the Advanced Division team competition, hosted by Stanford ACM.",
-                "icon": "🏆"
-            },
-            {
-                "title": "President’s Volunteer Service Award – Gold",
-                "description": "2024 · Recognized for 250+ volunteer hours in one year. Continue serving the community through education, mentorship, and patient support.",
-                "icon": "💛"
-            },
-            {
-                "title": "Foothill College – Dean’s List, First Honors",
-                "description": "Earned First Honors in two quarters while pursuing college coursework alongside high school.",
-                "icon": "🎓"
-            }
-        ]
-    }
-];
+
 
   return (
     <section id="journey" className="py-32 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 relative overflow-hidden">
@@ -220,13 +56,13 @@ export function Journey() {
             />
           </h2>
           <p className="text-indigo-200 max-w-3xl mx-auto">
-            My continuing work as a senior, recent research experiences, and the teaching, service, and advocacy that connect them.
+            {category === 'research' ? 'Exploring how AI, data, and experimental evidence can make technology more useful to people.' : category === 'about' ? 'Learning, service, and the recognition along the way.' : 'Continuing leadership, teaching, development, and advocacy — alongside the experiences that shaped them.'}
           </p>
         </motion.div>
 
         {/* Journey Timeline */}
         <div className="space-y-24" ref={containerRef}>
-          {journeyData.map((period, periodIndex) => (
+          {journeyData.map(period => ({ ...period, cards: period.cards.filter(card => category === 'community' ? ['stem4others', 'schoolhouse', 'stem-mentoring', 'va-palo-alto', 'noaa-kinnu', 'girls-who-code'].includes(card.id) : card.category === category) })).filter(period => period.cards.length > 0).map((period, periodIndex) => (
             <div key={periodIndex}>
               {/* Period Header */}
               <motion.div
@@ -306,11 +142,12 @@ function ParallaxCard({ card, color, index }: { card: any; color: string; index:
         {/* Content */}
         <div className="relative z-10">
           <h4 className="text-white mb-4 group-hover:text-indigo-300 transition-colors">
-            {card.title}
+            <a href={siteHref(card.href)} className="after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-purple-400">{card.title}</a>
           </h4>
           <p className="text-indigo-200 leading-relaxed">
             {card.description}
           </p>
+          <div className="text-purple-400 text-sm uppercase tracking-wider mt-6">View details →</div>
         </div>
 
         {/* Decorative element */}
