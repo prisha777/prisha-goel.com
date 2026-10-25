@@ -1,3 +1,4 @@
+import { PhotographyTeaser } from './PhotographyTeaser';
 import portrait from '@/assets/portfolio/portrait.webp';
 import { siteHref } from '../navigation';
 
@@ -38,6 +39,7 @@ export function Home() {
         </a>)}
       </div>
     </section>
+    <PhotographyTeaser/>
     <section className="home-contact-strip"><p>For research, nonprofit development,<br />or a conversation about teaching.</p><a className="metal-button" href="mailto:goelprisha.07@gmail.com">Let’s get in touch <span aria-hidden="true">↗</span></a></section>
   </>;
 }

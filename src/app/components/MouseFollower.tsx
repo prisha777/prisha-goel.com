@@ -1,67 +1,38 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
 
+/** Decorative only: keyboard, touch and reduced-motion visitors retain native controls. */
 export function MouseFollower() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+  const dot=useRef<HTMLDivElement>(null), ring=useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    const query=matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+    let cleanup=()=>{};
+    const configure=()=>{
+      cleanup();
+      if(!query.matches)return;
+      let x=0,y=0,rx=0,ry=0,frame=0;
+      const hide=()=>{document.documentElement.classList.remove('cursor-ready');cancelAnimationFrame(frame);frame=0;};
+      const animate=()=>{
+        rx+=(x-rx)*.2;ry+=(y-ry)*.2;
+        if(ring.current)ring.current.style.transform=`translate3d(${rx}px,${ry}px,0)`;
+        frame=Math.abs(x-rx)+Math.abs(y-ry)>.1?requestAnimationFrame(animate):0;
+      };
+      const move=(event:PointerEvent)=>{
+        if(event.pointerType!=='mouse')return;
+        x=event.clientX;y=event.clientY;
+        if(!document.documentElement.classList.contains('cursor-ready')){rx=x;ry=y;document.documentElement.classList.add('cursor-ready');}
+        if(dot.current)dot.current.style.transform=`translate3d(${x}px,${y}px,0)`;
+        if(!frame)frame=requestAnimationFrame(animate);
+        const target=event.target instanceof Element?event.target:null;
+        ring.current?.classList.toggle('cursor-link',!!target?.closest('a,button,input,textarea,select'));
+        ring.current?.classList.toggle('cursor-view',!!target?.closest('[data-cursor="view"]'));
+      };
+      document.addEventListener('pointermove',move,{passive:true});
+      document.addEventListener('pointerleave',hide);
+      window.addEventListener('blur',hide);
+      cleanup=()=>{hide();document.removeEventListener('pointermove',move);document.removeEventListener('pointerleave',hide);window.removeEventListener('blur',hide);};
     };
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.classList.contains('hoverable')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
-  }, []);
-
-  return (
-    <>
-      <motion.div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 10,
-          y: mousePosition.y - 10,
-          scale: isHovering ? 2 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5
-        }}
-      >
-        <div className="w-5 h-5 rounded-full bg-white" />
-      </motion.div>
-      <motion.div
-        className="fixed pointer-events-none z-50"
-        animate={{
-          x: mousePosition.x - 20,
-          y: mousePosition.y - 20,
-          scale: isHovering ? 1.5 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 150,
-          damping: 15,
-          mass: 0.1
-        }}
-      >
-        <div className="w-10 h-10 rounded-full border-2 border-purple-500 opacity-50" />
-      </motion.div>
-    </>
-  );
+    configure();query.addEventListener('change',configure);
+    return ()=>{cleanup();query.removeEventListener('change',configure);};
+  },[]);
+  return <><div ref={dot} className="cursor-dot" aria-hidden="true"/><div ref={ring} className="cursor-ring" aria-hidden="true"><span>View</span></div></>;
 }
