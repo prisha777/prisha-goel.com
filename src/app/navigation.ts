@@ -6,7 +6,5 @@ export const navigation = [
   { label: 'Research', path: 'research/' },
   { label: 'Projects', path: 'projects/' },
   { label: 'Experience', path: 'experience/' },
-  { label: 'Community', path: 'community/' },
-  { label: 'Press', path: 'press/' },
-  { label: 'Gallery', path: 'gallery/' },
+  { label: 'Writing & Media', path: 'press/' },
 ];

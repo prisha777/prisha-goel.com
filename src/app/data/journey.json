@@ -7,7 +7,7 @@
     "cards": [
       {
         "title": "STEM4Others – Chapter President, Tutor & App Developer",
-        "description": "January 2023–Present · Continue leading the Palo Alto chapter, teaching weekly Python and Java sessions for 30+ K–12 students at Mitchell Park Library. Lead 5+ student developers building Stemplore, a free educational platform.",
+        "description": "January 2023–Present · Lead the Palo Alto chapter and teach weekly Python and Java sessions for 30+ K–12 students at Mitchell Park Library. Develop a reusable, multi-level curriculum that helps learners progress to independent projects.",
         "icon": "🎓",
         "id": "stem4others",
         "category": "experience",
@@ -103,7 +103,7 @@
       },
       {
         "title": "Cambridge Centre for International Research – Student Researcher",
-        "description": "2026 · Worked with Daniel Ebanks to analyze COVID-related public sentiment in Twitter data. Investigated failures on irony and tone, where sentiment polarity could invert meaning despite confident predictions. Also presented flood vulnerability research in a CCIR Student Spotlight.",
+        "description": "2026 · Worked with Daniel Ebanks to analyze COVID-related public sentiment in Twitter data. Investigated failures on irony and tone, where sentiment polarity could invert meaning despite confident predictions.",
         "icon": "🔎",
         "id": "ccir",
         "category": "research",
@@ -150,8 +150,8 @@
     "color": "from-purple-500 to-pink-500",
     "cards": [
       {
-        "title": "STEM4Others & Dreamcatchers",
-        "description": "Tutored middle and elementary school students in coding and STEM and assisted local teams in programming competitions. Continue building on these teaching foundations through chapter leadership and weekly tutoring.",
+        "title": "Dreamcatchers – STEM Tutor",
+        "description": "Tutored middle and elementary school students in coding and STEM, and assisted local teams with programming competitions.",
         "icon": "💻",
         "id": "dreamcatchers",
         "category": "experience",
@@ -167,7 +167,7 @@
       },
       {
         "title": "Climate Policy Engagement – CCVL",
-        "description": "Participated in youth advocacy, letter-writing campaigns, and community education. Continue climate and health advocacy through Induction Rocks.",
+        "description": "Participated in youth advocacy, letter-writing campaigns, and community education through CCVL.",
         "icon": "📢",
         "id": "climate-policy",
         "category": "experience",

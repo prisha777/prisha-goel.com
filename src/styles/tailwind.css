@@ -1,4 +1,5 @@
 @import 'tailwindcss' source(none);
-@source '../**/*.{js,ts,jsx,tsx}';
 
-@import 'tw-animate-css';
+/* Scan the rendered site, excluding archived layouts and unused UI components. */
+@source '../app/App.tsx';
+@source '../app/components/{Home,Header,Footer,PageIntro,ContentIndex,DetailPage,ResearchMedia,AboutPage,MediaPage,ContactPage}.tsx';
