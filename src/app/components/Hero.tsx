@@ -127,7 +127,7 @@ export function Hero() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-purple-500">💼</span>
-            <a href="https://www.linkedin.com/in/prisha-goel-118421287/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors">
+            <a href="https://www.linkedin.com/in/prisha-goel/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors">
               LinkedIn
             </a>
           </div>
@@ -171,6 +171,16 @@ export function Hero() {
             <span className="inline-block w-1 h-12 md:h-16 bg-purple-500 ml-2 animate-pulse" />
           </h1>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-purple-200 max-w-2xl mx-auto mb-8"
+        >
+          Senior at Palo Alto Middle College · Class of 2027<br />
+          AI researcher, developer &amp; STEM educator
+        </motion.p>
 
         {/* CTA Buttons - Modern Round Social Media Style */}
         <motion.div

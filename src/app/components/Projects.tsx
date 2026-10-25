@@ -13,6 +13,42 @@ export function Projects() {
 
   const projects = [
     {
+      title: 'Stemplore',
+      category: 'STEM4Others · Educational Platform',
+      description: 'Lead 5+ student developers building a free educational platform with JavaScript, HTML/CSS, and Python, extending our weekly STEM teaching into accessible online learning.',
+      image: '',
+      preview: 'STEM',
+      year: 'Ongoing',
+      color: 'from-purple-500 to-pink-500',
+      tags: ['Education', 'Team Leadership', 'Web Development'],
+      github: 'https://stemplore.com',
+      type: null
+    },
+    {
+      title: 'Leebo’s Sickle Cell Support Group',
+      category: 'Nonprofit Web Development',
+      description: 'Independently designed and built a nonprofit website with newly diagnosed families in mind, making essential information and support easier to find.',
+      image: '',
+      preview: 'Care + Code',
+      year: '2025',
+      color: 'from-blue-500 to-cyan-500',
+      tags: ['Nonprofit', 'Web Design', 'Accessibility'],
+      github: 'https://leeboscsg.org',
+      type: null
+    },
+    {
+      title: 'San Francisco Flood Vulnerability',
+      category: 'Independent Research · Foothill College',
+      description: 'Mapped neighborhood flood vulnerability using geographic and socioeconomic data. Research & Service Leadership Symposium finalist; presented in a CCIR Student Spotlight.',
+      image: '',
+      preview: 'Data × Climate',
+      year: '2026',
+      color: 'from-cyan-500 to-blue-500',
+      tags: ['Data Science', 'Climate', 'Research'],
+      github: 'https://www.youtube.com/watch?v=kckUt2K1BSo',
+      type: null
+    },
+    {
       title: 'Ping Pong Game',
       category: 'Game Development',
       description: 'Classic ping pong game with sound effects, collision detection, and smooth gameplay mechanics built from scratch.',
@@ -103,6 +139,7 @@ export function Projects() {
   ];
 
   const handleProjectClick = (project: typeof projects[0]) => {
+    if (!project.type) return;
     setSelectedProject({
       title: project.title,
       type: project.type,
@@ -151,22 +188,25 @@ export function Projects() {
             className="text-center mb-16"
           >
             <div className="text-sm tracking-widest uppercase mb-4 text-purple-400">
-              GitHub Repository
+              Selected Work
             </div>
             <h2 className="text-white mb-6">
-              GitHub Projects
+              Projects &amp; Development
             </h2>
             <p className="text-purple-200 max-w-2xl mx-auto">
-              A collection of coding projects from 2021 to 2025, showcasing growth in game development, web design, and educational tools
+              From community platforms and climate research to games and personal tools, a growing collection of projects from 2021 through 2026.
             </p>
           </motion.div>
 
           {/* Card Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
-              <motion.div
+              <motion.a
                 key={index}
-                className="group cursor-pointer hoverable relative"
+                href={project.type ? '#projects' : project.github}
+                target={project.type ? undefined : '_blank'}
+                rel={project.type ? undefined : 'noopener noreferrer'}
+                className="group cursor-pointer hoverable relative block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-400"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -174,7 +214,12 @@ export function Projects() {
                 onMouseEnter={() => setHoveredProject(index)}
                 onMouseLeave={() => setHoveredProject(null)}
                 whileHover={{ y: -10 }}
-                onClick={() => handleProjectClick(project)}
+                onClick={(event) => {
+                  if (project.type) {
+                    event.preventDefault();
+                    handleProjectClick(project);
+                  }
+                }}
               >
                 {/* Card */}
                 <div className="bg-slate-900/50 backdrop-blur-sm border border-purple-800/30 rounded-lg overflow-hidden hover:border-purple-600 transition-all">
@@ -187,11 +232,19 @@ export function Projects() {
                       }}
                       transition={{ duration: 0.3 }}
                     />
-                    <ImageWithFallback
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover mix-blend-overlay"
-                    />
+                    {project.image ? (
+                      <ImageWithFallback
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover mix-blend-overlay"
+                      />
+                    ) : (
+                      <div aria-hidden="true" className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+                        <div className={`w-16 h-1 rounded-full bg-gradient-to-r ${project.color}`} />
+                        <span className="text-3xl text-white font-semibold tracking-tight">{project.preview}</span>
+                        <span className="text-xs text-purple-300 uppercase tracking-widest">{project.year === '2026' ? 'Research spotlight' : 'Community technology'}</span>
+                      </div>
+                    )}
                     <motion.div
                       className={`absolute inset-0 bg-gradient-to-t ${project.color}`}
                       animate={{
@@ -242,7 +295,7 @@ export function Projects() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 

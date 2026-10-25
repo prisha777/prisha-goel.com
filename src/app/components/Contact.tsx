@@ -79,7 +79,7 @@ export function Contact() {
               <span className="relative z-10">Send Email</span>
             </motion.a>
             <motion.a 
-              href="https://www.linkedin.com/in/prisha-goel-118421287/"
+              href="https://www.linkedin.com/in/prisha-goel/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 border-2 border-white text-white uppercase tracking-widest text-sm rounded-full backdrop-blur-sm hover:bg-white/10 transition-colors"

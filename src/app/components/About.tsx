@@ -44,7 +44,7 @@ export function About() {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              I'm a high school student passionate about exploring how AI intersects with 
+              I'm a senior at Palo Alto Middle College High School (Class of 2027), dual-enrolled at Foothill College, passionate about exploring how AI intersects with
               biology, healthcare, and climate science. I love diving into projects that 
               combine different fields to solve real-world problems.
             </motion.p>
@@ -54,9 +54,7 @@ export function About() {
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              Whether I'm coding games, leading STEM workshops at my local library, or 
-              researching biosensors at Brown, I'm always learning something new and trying 
-              to make an impact in my community.
+              From biosensor research at Brown to medical imaging at Stanford AIMI and AI-assisted biology at UC Irvine, I explore what makes technology useful to people. I also continue leading STEM4Others workshops, mentoring students, and advocating for healthier homes with Induction Rocks.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -78,8 +76,8 @@ export function About() {
           >
             {[
               { num: '15+', label: 'Projects' },
-              { num: '3+', label: 'Years' },
-              { num: '100%', label: 'Dedication' }
+              { num: '300+', label: 'Volunteer Hours' },
+              { num: '30+', label: 'Students Weekly' }
             ].map((stat, index) => (
               <motion.div
                 key={index}

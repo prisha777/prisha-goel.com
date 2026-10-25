@@ -16,7 +16,7 @@ export function Footer() {
           </div>
           <div className="flex gap-8">
             <motion.a 
-              href="https://www.linkedin.com/in/prisha-goel-118421287/"
+              href="https://www.linkedin.com/in/prisha-goel/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm uppercase tracking-wide text-purple-300 hover:text-white transition-colors"
