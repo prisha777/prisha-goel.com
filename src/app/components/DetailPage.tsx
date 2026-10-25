@@ -4,7 +4,6 @@ import { siteHref } from '../navigation';
 import { PageIntro } from './PageIntro';
 import { ResearchMedia } from './ResearchMedia';
 
-export const paperPath = 'papers/prisha-goel-ige-epitope-mapping.pdf';
 export function PaperButton() {
   return <a href="https://scienceyouth.org/web/viewer.php?id=352" target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm hover:shadow-lg hover:shadow-purple-600/20">Read published paper ↗</a>;
 }
@@ -28,7 +27,7 @@ export function DetailPage({category,id}:{category:string;id:string}) {
         {project && <div className="mt-8 flex flex-wrap gap-3 items-center"><a href={project.github} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm">{project.type ? 'View on GitHub' : project.title.includes('Flood') ? 'Watch research spotlight' : 'Visit project'} ↗</a><div className="flex flex-wrap gap-2">{project.tags.map(tag=><span key={tag} className="px-3 py-1 rounded-full bg-slate-800 border border-purple-800/30 text-purple-300 text-xs">{tag}</span>)}</div></div>}
       </article>
       {(id==='flood-vulnerability' || id==='ccir' || (category==='projects' && id==='3')) && <ResearchMedia />}
-      {id==='uci-gati' && <div className="rounded-2xl overflow-hidden border border-indigo-800/30 bg-slate-900/50 p-6 md:p-8"><h2 className="text-white text-xl mb-5">Inside the paper</h2><p className="text-indigo-200 leading-relaxed mb-6">My literature review explores why AI predictions of IgE-binding epitopes need experimental validation. The central question is how computational approaches can complement evidence from the lab.</p><a href={siteHref(paperPath)} target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden bg-white"><img src={siteHref('media/uci-paper-preview.jpg')} alt="Title page of Prisha Goel’s UCI × GATI BEAM paper" className="w-full max-w-2xl mx-auto" loading="lazy" /></a></div>}
+      {id==='uci-gati' && <div className="rounded-2xl overflow-hidden border border-indigo-800/30 bg-slate-900/50 p-6 md:p-8"><h2 className="text-white text-xl mb-5">Inside the paper</h2><p className="text-indigo-200 leading-relaxed mb-6">My literature review explores why AI predictions of IgE-binding epitopes need experimental validation. The central question is how computational approaches can complement evidence from the lab.</p><a href="https://scienceyouth.org/web/viewer.php?id=352" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden bg-white"><img src={siteHref('media/uci-paper-preview.jpg')} alt="Title page of Prisha Goel’s UCI × GATI BEAM paper" className="w-full max-w-2xl mx-auto" loading="lazy" /></a></div>}
       {project?.image && <figure className="rounded-2xl border border-indigo-800/30 overflow-hidden"><img src={project.image} alt={`${project.title} project preview`} className="w-full max-h-[500px] object-cover" loading="lazy" /><figcaption className="p-4 text-sm text-indigo-300">{project.type === 'solar' ? 'Illustrative image from Unsplash; the project link opens the original work.' : 'Project screenshot from my local portfolio assets.'}</figcaption></figure>}
     </div>
   </>;
